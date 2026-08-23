@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Farm Easy static portfolio demo based on the FarmEasy React + Flask project." />
+    <title>Farm Easy | Static Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{
+          --bg:#f6f8f4;
+          --surface:#ffffff;
+          --surface-2:#f0f6ed;
+          --text:#1b2a20;
+          --muted:#667568;
+          --line:#dfe8dc;
+          --green:#2f6f3e;
+          --green-2:#4b8c57;
+          --orange:#d98b2b;
+          --shadow:0 14px 38px rgba(38,74,45,.08);
+          --radius:18px;
+        }
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{
+          margin:0;
+          font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
+          color:var(--text);
+          background:linear-gradient(180deg,#f9fbf7 0,#f5f8f3 100%);
+          line-height:1.55;
+        }
+        button,input{font:inherit}
+        button{cursor:pointer}
+        a{color:inherit}
+        .shell{width:min(1180px,calc(100% - 32px));margin:auto}
+        .topbar{
+          position:sticky;top:0;z-index:20;
+          background:rgba(255,255,255,.95);
+          backdrop-filter:blur(12px);
+          border-bottom:1px solid var(--line);
+        }
+        .nav{
+          min-height:68px;display:flex;align-items:center;gap:18px;
+        }
+        .brand{
+          font-family:Manrope,sans-serif;font-weight:700;font-size:1.2rem;
+          color:var(--green);text-decoration:none;white-space:nowrap;
+        }
+        .brand span{color:var(--orange)}
+        .search{
+          flex:1;display:flex;max-width:560px;margin:0 auto;
+          border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;
+        }
+        .search input{border:0;outline:0;padding:10px 12px;flex:1;min-width:0}
+        .search button{border:0;background:var(--green);color:white;padding:0 16px}
+        .nav-actions{display:flex;align-items:center;gap:8px}
+        .nav-btn{
+          border:0;background:transparent;padding:9px 10px;border-radius:10px;
+          color:#445548;font-weight:600;
+        }
+        .nav-btn:hover{background:#eef5eb;color:var(--green)}
+        .cart-pill{
+          border:1px solid #cfe0ca;background:#f1f7ee;color:var(--green);
+          padding:8px 11px;border-radius:999px;font-weight:700;
+        }
+
+        .view{display:none}
+        .view.active{display:block}
+
+        .hero{padding:54px 0 30px}
+        .hero-card{
+          display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center;
+          border:1px solid var(--line);border-radius:28px;overflow:hidden;
+          background:linear-gradient(135deg,#f4f9f1,#fff7ea);
+          box-shadow:var(--shadow);
+        }
+        .hero-copy{padding:42px}
+        .eyebrow{
+          color:var(--green);text-transform:uppercase;letter-spacing:.09em;
+          font-weight:700;font-size:.74rem;margin:0 0 10px;
+        }
+        h1,h2,h3{font-family:Manrope,sans-serif;margin:0;color:#193022}
+        h1{font-size:clamp(2rem,4vw,3.4rem);line-height:1.08}
+        h2{font-size:clamp(1.45rem,2.5vw,2rem)}
+        h3{font-size:1rem}
+        .hero-copy p{max-width:660px;color:#55675a;margin:16px 0 0}
+        .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+        .btn{
+          border-radius:11px;padding:10px 15px;border:1px solid transparent;
+          font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:7px
+        }
+        .btn-primary{background:var(--green);color:#fff}
+        .btn-secondary{background:#fff;border-color:var(--line);color:var(--green)}
+        .farm-visual{
+          min-height:340px;padding:26px;display:grid;place-items:center;position:relative;
+          background:
+            radial-gradient(circle at 80% 15%,rgba(217,139,43,.25),transparent 25%),
+            linear-gradient(180deg,#dfeeda,#cbe5c8 68%,#a8cf91 68%);
+        }
+        .farm-scene{font-size:6.4rem;filter:drop-shadow(0 12px 12px rgba(44,86,51,.15))}
+        .farm-visual small{
+          position:absolute;bottom:18px;right:18px;background:rgba(255,255,255,.85);
+          border:1px solid rgba(255,255,255,.8);border-radius:999px;padding:6px 10px;
+          color:#4c6251;font-weight:600
+        }
+
+        .section{padding:34px 0}
+        .section-head{
+          display:flex;justify-content:space-between;gap:22px;align-items:end;margin-bottom:18px
+        }
+        .section-head p{margin:0;color:var(--muted);max-width:650px;font-size:.9rem}
+        .category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+        .category{
+          border:1px solid var(--line);background:var(--surface);border-radius:16px;
+          padding:18px;box-shadow:0 7px 20px rgba(34,68,40,.04);
+          text-align:left;
+        }
+        .category .icon{font-size:1.8rem;margin-bottom:9px;display:block}
+        .category span{display:block;color:var(--muted);font-size:.8rem;margin-top:4px}
+
+        .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+        .product{
+          border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px;
+          box-shadow:0 8px 24px rgba(32,65,38,.05)
+        }
+        .product-art{
+          height:130px;border-radius:12px;display:grid;place-items:center;font-size:3.7rem;
+          background:linear-gradient(135deg,#eff7eb,#fbf4e8);margin-bottom:12px
+        }
+        .product .meta{display:flex;justify-content:space-between;gap:12px;align-items:start}
+        .product .price{font-weight:700;color:var(--green);white-space:nowrap}
+        .stars{color:#d98b2b;font-size:.85rem;margin:5px 0}
+        .qty-row{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px}
+        .qty{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+        .qty button,.qty span{border:0;background:#fff;min-width:31px;height:31px;display:grid;place-items:center}
+        .qty button:hover{background:#eef5eb}
+        .add-btn{border:0;border-radius:9px;background:var(--green);color:#fff;padding:8px 11px;font-weight:700}
+        .demo-note{
+          margin-top:10px;color:#7a877c;font-size:.78rem
+        }
+
+        .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+        .feature-card{
+          background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px
+        }
+        .feature-card strong{display:block;margin-bottom:4px}
+        .feature-card p{margin:0;color:var(--muted);font-size:.86rem}
+        .tech-strip{
+          margin-top:16px;display:flex;flex-wrap:wrap;gap:7px
+        }
+        .chip{
+          background:#eff5ec;border:1px solid #d9e6d4;color:#405646;
+          padding:5px 8px;border-radius:999px;font-size:.75rem;font-weight:600
+        }
+
+        .panel-page{padding:34px 0 60px}
+        .panel{
+          max-width:880px;margin:auto;background:#fff;border:1px solid var(--line);
+          border-radius:20px;box-shadow:var(--shadow);padding:24px
+        }
+        .panel-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:20px}
+        .back{border:0;background:#eef5eb;color:var(--green);border-radius:10px;padding:8px 11px;font-weight:700}
+        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .field label{display:block;font-size:.78rem;color:#667568;margin-bottom:5px;font-weight:600}
+        .field input,.field textarea{
+          width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 11px;outline:0
+        }
+        .field textarea{min-height:100px;resize:vertical}
+        .field.full{grid-column:1/-1}
+        .slot{
+          margin-top:16px;padding:12px;border-radius:12px;background:#f1f7ee;border:1px solid #d7e7d2;
+          color:#3e5f46;font-size:.86rem
+        }
+
+        .cart-list{display:grid;gap:10px}
+        .cart-item{
+          display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;
+          padding:11px;border:1px solid var(--line);border-radius:12px
+        }
+        .cart-icon{width:52px;height:52px;border-radius:10px;background:#eef6ea;display:grid;place-items:center;font-size:1.5rem}
+        .cart-total{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-weight:700}
+        .login-box{max-width:440px}
+        .login-box .field{margin-bottom:12px}
+
+        .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .admin-card{border:1px solid var(--line);border-radius:14px;padding:15px;background:#fbfcfa}
+        .admin-card p{color:var(--muted);font-size:.84rem;margin:5px 0 0}
+
+        footer{border-top:1px solid var(--line);padding:24px 0;color:#718075;font-size:.82rem;margin-top:24px}
+        footer .shell{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+        footer a{color:var(--green);font-weight:600;text-decoration:none}
+
+        .toast{
+          position:fixed;right:18px;bottom:18px;z-index:50;background:#193022;color:white;
+          border-radius:11px;padding:10px 13px;font-size:.84rem;opacity:0;transform:translateY(10px);
+          pointer-events:none;transition:.2s
+        }
+        .toast.show{opacity:1;transform:none}
+
+        @media(max-width:900px){
+          .hero-card{grid-template-columns:1fr}
+          .farm-visual{min-height:240px}
+          .category-grid{grid-template-columns:repeat(2,1fr)}
+          .product-grid,.feature-grid{grid-template-columns:1fr 1fr}
+          .search{display:none}
+        }
+        @media(max-width:620px){
+          .shell{width:min(100% - 20px,1180px)}
+          .nav{gap:8px}
+          .nav-actions .nav-btn:nth-child(2){display:none}
+          .hero-copy{padding:26px 20px}
+          .category-grid,.product-grid,.feature-grid,.form-grid,.admin-grid{grid-template-columns:1fr}
+          .field.full{grid-column:auto}
+          .panel{padding:18px}
+          .section-head{align-items:start;flex-direction:column}
+        }
+    </style>
+</head>
+<body>
+<header class="topbar">
+    <div class="shell nav">
+        <a class="brand" href="#home" onclick="showView('home')">Farm <span>Easy</span></a>
+        <div class="search">
+            <input id="searchInput" type="search" placeholder="Search farm products" />
+            <button type="button" onclick="filterProducts()">Search</button>
+        </div>
+        <div class="nav-actions">
+            <button class="nav-btn" onclick="showView('login')">Sign In</button>
+            <button class="nav-btn" onclick="showView('admin')">Admin</button>
+            <button class="cart-pill" onclick="showView('cart')">🛒 <span id="cartCount">0</span></button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section id="homeView" class="view active">
+        <div class="shell hero">
+            <div class="hero-card">
+                <div class="hero-copy">
+                    <p class="eyebrow">Farm Easy · Portfolio Demo</p>
+                    <h1>Farm supplies and soil services in one simple experience.</h1>
+                    <p>
+                        A static showcase of the FarmEasy project: browse agricultural product categories,
+                        manage quantities and cart items, book soil testing, sign in, and preview admin product management.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="document.getElementById('catalog').scrollIntoView()">Browse Products</button>
+                        <button class="btn btn-secondary" onclick="showView('soil')">Book Soil Test</button>
+                    </div>
+                </div>
+                <div class="farm-visual">
+                    <div class="farm-scene">🌾🚜</div>
+                    <small>Static demo · no live transactions</small>
+                </div>
+            </div>
+        </div>
+
+        <section class="shell section">
+            <div class="section-head">
+                <div><p class="eyebrow">Categories from the project</p><h2>Shop by category</h2></div>
+                <p>The original landing page surfaces these agricultural categories and routes users into the product catalog.</p>
+            </div>
+            <div class="category-grid">
+                <button class="category" onclick="selectCategory('Fertilizers')"><span class="icon">🌱</span><strong>Fertilizers</strong><span>Browse crop nutrition products</span></button>
+                <button class="category" onclick="selectCategory('Pesticides')"><span class="icon">🧴</span><strong>Pesticides</strong><span>Crop-protection category</span></button>
+                <button class="category" onclick="selectCategory('Insecticides')"><span class="icon">🐞</span><strong>Insecticides</strong><span>Insect-control category</span></button>
+                <button class="category" onclick="selectCategory('Bio Fertilizers')"><span class="icon">🍃</span><strong>Bio Fertilizers</strong><span>Biological soil inputs</span></button>
+            </div>
+        </section>
+
+        <section class="shell section" id="catalog">
+            <div class="section-head">
+                <div><p class="eyebrow">Product flow</p><h2>Demo catalog</h2></div>
+                <p>The React product component supports $/lb pricing, ratings, quantity selection and adding items to a user cart. Items below are illustrative demo data.</p>
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+            <p class="demo-note">Demo items are illustrative; the repository loads product data dynamically from the Flask <code>/video</code> API.</p>
+        </section>
+
+        <section class="shell section">
+            <div class="section-head">
+                <div><p class="eyebrow">Project capabilities</p><h2>What the repository implements</h2></div>
+                <p>A compact view of the project’s actual architecture and application flows.</p>
+            </div>
+            <div class="feature-grid">
+                <article class="feature-card"><strong>Authentication</strong><p>Firebase email/password sign-in and account registration with authenticated user state.</p></article>
+                <article class="feature-card"><strong>Shopping Cart</strong><p>Per-user cart data with quantity, pricing, review and checkout flows.</p></article>
+                <article class="feature-card"><strong>Soil Testing</strong><p>Date availability check, soil-testing route and booking form with optional previous report upload.</p></article>
+                <article class="feature-card"><strong>REST Backend</strong><p>Flask-RESTful APIs for products and cart operations with SQLAlchemy models.</p></article>
+                <article class="feature-card"><strong>Admin Management</strong><p>Admin routes support adding products and product update/delete operations.</p></article>
+                <article class="feature-card"><strong>Responsive UI</strong><p>React application with React Router, Reactstrap/Bootstrap and Material UI dependencies.</p></article>
+            </div>
+            <div class="tech-strip">
+                <span class="chip">React</span><span class="chip">JavaScript</span><span class="chip">React Router</span>
+                <span class="chip">Bootstrap / Reactstrap</span><span class="chip">Material UI</span><span class="chip">Firebase Auth</span>
+                <span class="chip">Flask</span><span class="chip">Flask-RESTful</span><span class="chip">SQLAlchemy</span><span class="chip">SQLite</span>
+            </div>
+        </section>
+    </section>
+
+    <section id="soilView" class="view panel-page">
+        <div class="shell">
+            <div class="panel">
+                <div class="panel-top"><div><p class="eyebrow">Soil Testing</p><h2>Book a soil-testing slot</h2></div><button class="back" onclick="showView('home')">← Back</button></div>
+                <div class="form-grid">
+                    <div class="field"><label>Name</label><input placeholder="Enter name"></div>
+                    <div class="field"><label>Village</label><input placeholder="Village name"></div>
+                    <div class="field"><label>City</label><input placeholder="City"></div>
+                    <div class="field"><label>Pincode</label><input placeholder="Pincode"></div>
+                    <div class="field full"><label>Description</label><textarea placeholder="Describe your soil-testing request"></textarea></div>
+                    <div class="field full"><label>Previous test report (optional)</label><input type="file"></div>
+                </div>
+                <div class="slot">✓ Demo slot available. In the original project, the landing page checks the selected date before routing to this form.</div>
+                <div class="hero-actions"><button class="btn btn-primary" onclick="showToast('Soil-test booking simulated for portfolio demo')">Book Slot</button></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cartView" class="view panel-page">
+        <div class="shell">
+            <div class="panel">
+                <div class="panel-top"><div><p class="eyebrow">Checkout</p><h2>Your basket</h2></div><button class="back" onclick="showView('home')">← Continue shopping</button></div>
+                <div id="cartList" class="cart-list"></div>
+                <div class="cart-total"><span>Subtotal</span><span id="cartTotal">$0</span></div>
+                <div class="hero-actions"><button class="btn btn-primary" onclick="showView('payment')">Proceed to Checkout</button></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="paymentView" class="view panel-page">
+        <div class="shell">
+            <div class="panel">
+                <div class="panel-top"><div><p class="eyebrow">Payment flow</p><h2>Review order</h2></div><button class="back" onclick="showView('cart')">← Basket</button></div>
+                <div class="feature-grid" style="grid-template-columns:1fr 1fr">
+                    <article class="feature-card"><strong>Delivery address</strong><p>Signed-in user address details appear here in the application flow.</p></article>
+                    <article class="feature-card"><strong>Payment method</strong><p>Static preview only. No payment details are collected on this page.</p></article>
+                </div>
+                <div class="slot">The original project contains a checkout review page and payment section; this demo intentionally does not process payments.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="loginView" class="view panel-page">
+        <div class="shell">
+            <div class="panel login-box">
+                <div class="panel-top"><div><p class="eyebrow">Firebase Authentication</p><h2>Sign in</h2></div><button class="back" onclick="showView('home')">← Back</button></div>
+                <div class="field"><label>Email</label><input type="email" placeholder="name@example.com"></div>
+                <div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
+                <button class="btn btn-primary" onclick="showToast('Sign-in simulated — no credentials are sent')">Sign In</button>
+                <button class="btn btn-secondary" onclick="showToast('Account creation simulated')">Create Account</button>
+                <p class="demo-note">The repository uses Firebase email/password authentication. This static page never sends credentials.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="adminView" class="view panel-page">
+        <div class="shell">
+            <div class="panel">
+                <div class="panel-top"><div><p class="eyebrow">Admin</p><h2>Product management</h2></div><button class="back" onclick="showView('home')">← Back</button></div>
+                <div class="admin-grid">
+                    <div class="admin-card"><strong>Add product</strong><p>Product ID, title, price, image URL and rating are submitted to the Flask <code>/video</code> API in the original project.</p></div>
+                    <div class="admin-card"><strong>Update / Delete</strong><p>Product-specific API routes support editing and deleting catalog records.</p></div>
+                </div>
+                <div class="form-grid" style="margin-top:16px">
+                    <div class="field"><label>Product ID</label><input value="101"></div>
+                    <div class="field"><label>Product title</label><input value="Demo Fertilizer"></div>
+                    <div class="field"><label>Price</label><input value="149"></div>
+                    <div class="field"><label>Rating</label><input value="4"></div>
+                    <div class="field full"><label>Image URL</label><input placeholder="https://..."></div>
+                </div>
+                <div class="hero-actions"><button class="btn btn-primary" onclick="showToast('Admin add-product action simulated')">Add Item</button></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="shell">
+        <span>Farm Easy static portfolio demo · built from the public project structure</span>
+        <a href="https://github.com/saiteja477/farmeasy" target="_blank" rel="noreferrer">View source on GitHub ↗</a>
+    </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+    const demoProducts = [
+      {id:1,title:"Fertilizer Mix",category:"Fertilizers",price:129,rating:4,icon:"🌱"},
+      {id:2,title:"Crop Protection",category:"Pesticides",price:189,rating:4,icon:"🧴"},
+      {id:3,title:"Insect Control",category:"Insecticides",price:159,rating:5,icon:"🐞"},
+      {id:4,title:"Bio Soil Booster",category:"Bio Fertilizers",price:139,rating:4,icon:"🍃"},
+      {id:5,title:"Plant Nutrient Pack",category:"Fertilizers",price:169,rating:5,icon:"🌿"},
+      {id:6,title:"Organic Input",category:"Bio Fertilizers",price:119,rating:4,icon:"🌾"}
+    ];
+    const quantities = Object.fromEntries(demoProducts.map(p => [p.id,1]));
+    const cart = [];
+
+    function renderProducts(list=demoProducts){
+      const grid=document.getElementById("productGrid");
+      grid.innerHTML=list.map(p=>`
+        <article class="product">
+          <div class="product-art">${p.icon}</div>
+          <div class="meta"><div><h3>${p.title}</h3><div class="stars">${"★".repeat(p.rating)}${"☆".repeat(5-p.rating)}</div></div><div class="price">$${p.price}/lb</div></div>
+          <div class="qty-row">
+            <div class="qty"><button onclick="changeQty(${p.id},-1)">−</button><span id="q${p.id}">${quantities[p.id]}</span><button onclick="changeQty(${p.id},1)">+</button></div>
+            <button class="add-btn" onclick="addToCart(${p.id})">Add to Basket</button>
+          </div>
+        </article>`).join("");
+    }
+
+    function changeQty(id,delta){
+      quantities[id]=Math.max(1,quantities[id]+delta);
+      const el=document.getElementById("q"+id);
+      if(el) el.textContent=quantities[id];
+    }
+
+    function addToCart(id){
+      const p=demoProducts.find(x=>x.id===id);
+      const existing=cart.find(x=>x.id===id);
+      if(existing) existing.qty+=quantities[id]; else cart.push({...p,qty:quantities[id]});
+      updateCart();
+      showToast(`${p.title} added to basket`);
+    }
+
+    function updateCart(){
+      document.getElementById("cartCount").textContent=cart.reduce((n,x)=>n+x.qty,0);
+      const list=document.getElementById("cartList");
+      if(!cart.length){
+        list.innerHTML='<div class="feature-card"><strong>Your basket is empty</strong><p>Add a demo item from the catalog to preview the checkout flow.</p></div>';
+      }else{
+        list.innerHTML=cart.map(x=>`<div class="cart-item"><div class="cart-icon">${x.icon}</div><div><strong>${x.title}</strong><div class="demo-note">${x.qty} × $${x.price}/lb</div></div><strong>$${x.qty*x.price}</strong></div>`).join("");
+      }
+      document.getElementById("cartTotal").textContent="$"+cart.reduce((n,x)=>n+x.qty*x.price,0);
+    }
+
+    function showView(name){
+      document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+      document.getElementById(name+"View").classList.add("active");
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+
+    function selectCategory(cat){
+      const subset=demoProducts.filter(p=>p.category===cat);
+      renderProducts(subset);
+      document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
+    }
+
+    function filterProducts(){
+      const q=document.getElementById("searchInput").value.trim().toLowerCase();
+      renderProducts(!q?demoProducts:demoProducts.filter(p=>(p.title+" "+p.category).toLowerCase().includes(q)));
+      document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
+    }
+
+    function showToast(message){
+      const t=document.getElementById("toast");
+      t.textContent=message;t.classList.add("show");
+      setTimeout(()=>t.classList.remove("show"),1900);
+    }
+
+    renderProducts();
+    updateCart();
+</script>
+</body>
+</html>
