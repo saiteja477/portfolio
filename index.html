@@ -1,0 +1,2611 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Sai Teja Chigulapally — Full Stack Java Developer specializing in Java 17+, Spring Boot, React, Angular, GCP, Dataflow, Apache Beam, Airflow and cloud-native systems."
+    />
+    <meta name="theme-color" content="#071426" />
+    <title>Sai Teja Chigulapally | Full Stack Java Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #071426;
+        --navy-2: #0b1f36;
+        --ink: #142033;
+        --muted: #607086;
+        --surface: #ffffff;
+        --surface-2: #f5f8fc;
+        --line: #dfe8f2;
+        --accent: #1f6feb;
+        --accent-2: #3b82f6;
+        --cyan: #0ea5e9;
+        --green: #16a34a;
+        --shadow: 0 22px 60px rgba(15, 35, 58, 0.1);
+        --shadow-soft: 0 12px 32px rgba(15, 35, 58, 0.07);
+        --radius: 22px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background: #f7f9fc;
+        line-height: 1.6;
+        text-rendering: optimizeLegibility;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background:
+          radial-gradient(
+            circle at 12% 7%,
+            rgba(59, 130, 246, 0.14),
+            transparent 27%
+          ),
+          radial-gradient(
+            circle at 90% 24%,
+            rgba(14, 165, 233, 0.09),
+            transparent 25%
+          ),
+          linear-gradient(180deg, #f8fbff 0%, #f7f9fc 46%, #f4f7fb 100%);
+      }
+      a {
+        color: inherit;
+      }
+      img {
+        max-width: 100%;
+      }
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+      .container {
+        width: min(1180px, calc(100% - 38px));
+        margin: 0 auto;
+      }
+      .section {
+        padding: 76px 0;
+        scroll-margin-top: 76px;
+      }
+      .section-soft {
+        background: rgba(255, 255, 255, 0.66);
+        border-block: 1px solid var(--line);
+      }
+      .kicker {
+        margin: 0 0 10px;
+        color: var(--accent);
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Inter", sans-serif;
+        color: #0b1829;
+        line-height: 1.2;
+        font-weight: 600;
+        text-wrap: balance;
+        margin-top: 0;
+      }
+      h1 {
+        font-size: clamp(1.9rem, 3.2vw, 2.65rem);
+        letter-spacing: -0.02em;
+        margin-bottom: 18px;
+      }
+      h2 {
+        font-size: clamp(1.4rem, 2vw, 1.9rem);
+        letter-spacing: -0.02em;
+        margin-bottom: 12px;
+      }
+      h3 {
+        font-size: 1rem;
+        margin-bottom: 7px;
+      }
+      p {
+        margin-top: 0;
+      }
+      .muted {
+        color: var(--muted);
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(16px) saturate(150%);
+        background: rgba(248, 251, 255, 0.88);
+        border-bottom: 1px solid rgba(215, 226, 239, 0.85);
+      }
+      .nav-wrap {
+        min-height: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand {
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font:
+          700 1.05rem "Inter",
+          sans-serif;
+      }
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background: linear-gradient(135deg, var(--accent), var(--cyan));
+        box-shadow: 0 10px 22px rgba(31, 111, 235, 0.24);
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: #4f6075;
+        font-weight: 500;
+        font-size: 0.86rem;
+        padding: 9px 11px;
+        border-radius: 10px;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--accent);
+        background: #eaf2ff;
+      }
+      .nav-links .resume-nav {
+        background: var(--navy);
+        color: #fff;
+        margin-left: 4px;
+        padding-inline: 15px;
+      }
+      .nav-links .resume-nav:hover {
+        background: #102e4f;
+        color: #fff;
+      }
+      .menu-button {
+        display: none;
+        border: 1px solid var(--line);
+        background: #fff;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+      }
+      .menu-button span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        margin: 4px auto;
+        background: #334155;
+        border-radius: 2px;
+      }
+
+      .hero {
+        padding: 72px 0 58px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 42px;
+        align-items: center;
+      }
+      .availability {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid #cce3d5;
+        color: #176334;
+        background: #f1fbf5;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        margin-bottom: 18px;
+      }
+      .availability i {
+        width: 9px;
+        height: 9px;
+        background: #22c55e;
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+      }
+      .hero h1 span {
+        color: var(--accent);
+      }
+      .hero-stack {
+        margin: -6px 0 16px;
+        color: var(--accent) !important;
+        font-size: 0.9rem !important;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+      .hero-copy > p {
+        max-width: 690px;
+        font-size: 0.98rem;
+        line-height: 1.68;
+        color: #4b5d72;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 28px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 13px;
+        text-decoration: none;
+        font-weight: 600;
+        border: 1px solid transparent;
+        transition: 0.18s ease;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), #1856bd);
+        color: #fff;
+        box-shadow: 0 14px 30px rgba(31, 111, 235, 0.24);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 34px rgba(31, 111, 235, 0.28);
+      }
+      .btn-secondary {
+        background: #fff;
+        color: #173559;
+        border-color: var(--line);
+      }
+      .btn-secondary:hover {
+        border-color: #b8cbe0;
+        background: #f8fbff;
+      }
+      .hero-meta {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+      .hero-meta a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.86rem;
+      }
+
+      .profile-card {
+        position: relative;
+        overflow: hidden;
+        color: #dbeafe;
+        background: linear-gradient(145deg, #071426, #0c2440);
+        border-radius: 28px;
+        padding: 22px;
+        box-shadow: 0 28px 70px rgba(7, 20, 38, 0.24);
+      }
+      .profile-card::after {
+        content: "";
+        position: absolute;
+        width: 230px;
+        height: 230px;
+        right: -92px;
+        top: -90px;
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.43),
+          transparent 68%
+        );
+      }
+      .terminal-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        position: relative;
+        z-index: 1;
+      }
+      .terminal-dots {
+        display: flex;
+        gap: 7px;
+      }
+      .terminal-dots i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #5e7792;
+      }
+      .terminal-dots i:first-child {
+        background: #fb7185;
+      }
+      .terminal-dots i:nth-child(2) {
+        background: #fbbf24;
+      }
+      .terminal-dots i:nth-child(3) {
+        background: #34d399;
+      }
+      .terminal-head span {
+        color: #8da8c4;
+        font-size: 0.81rem;
+        font-weight: 700;
+      }
+      .profile-summary {
+        margin: 0;
+        color: #c8ddf4;
+        font-size: 0.9rem;
+        position: relative;
+        z-index: 1;
+      }
+      .profile-points {
+        margin: 14px 0 0;
+        padding-left: 18px;
+        color: #b9cde2;
+        font-size: 0.84rem;
+        position: relative;
+        z-index: 1;
+      }
+      .profile-points li {
+        margin: 6px 0;
+      }
+      .quick-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 24px;
+        position: relative;
+        z-index: 1;
+      }
+      .quick-stats div {
+        padding: 14px 12px;
+        border: 1px solid rgba(168, 199, 230, 0.16);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+      }
+      .quick-stats strong {
+        display: block;
+        color: #fff;
+        font:
+          700 1.18rem "Inter",
+          sans-serif;
+      }
+      .quick-stats span {
+        color: #9eb6cf;
+        font-size: 0.76rem;
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: 0.78fr 1.22fr;
+        gap: 44px;
+        align-items: start;
+        margin-bottom: 38px;
+      }
+      .section-head > div,
+      .section-head > p {
+        align-self: start;
+      }
+      .section-head p:last-child {
+        margin-bottom: 0;
+        color: var(--muted);
+        max-width: 700px;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .skill-card,
+      .project-card,
+      .education-card,
+      .cert-card,
+      .experience-card {
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-soft);
+      }
+      .skill-card {
+        padding: 22px;
+      }
+      .skill-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: #eaf2ff;
+        color: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+        font-weight: 700;
+      }
+      .skill-card p {
+        color: var(--muted);
+        margin-bottom: 0;
+      }
+      .tags {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+      }
+      .tag {
+        padding: 6px 9px;
+        border-radius: 999px;
+        color: #29425e;
+        background: #f2f6fb;
+        border: 1px solid #e1eaf4;
+        font-size: 0.77rem;
+        font-weight: 600;
+      }
+
+      .experience-list {
+        display: grid;
+        gap: 18px;
+      }
+      .experience-card {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+        gap: 26px;
+        padding: 22px;
+      }
+      .experience-time strong {
+        display: block;
+        color: #0b1829;
+        font-family: "Inter", sans-serif;
+      }
+      .experience-time span {
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+      .role-company {
+        color: var(--accent);
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .role h3 {
+        font-size: 1.08rem;
+        margin-bottom: 6px;
+      }
+      .role ul {
+        margin: 14px 0 0;
+        padding-left: 20px;
+        color: #4e6074;
+      }
+      .role li {
+        margin: 7px 0;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: 1.35fr 0.65fr;
+        gap: 18px;
+      }
+      .project-card {
+        padding: 22px;
+      }
+      .project-card.featured {
+        grid-row: span 2;
+        background: linear-gradient(180deg, #fff, #f8fbff);
+      }
+      .project-label {
+        display: inline-flex;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #eaf2ff;
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      .project-card p {
+        color: var(--muted);
+      }
+      .project-list {
+        margin: 16px 0;
+        padding-left: 20px;
+        color: #526579;
+      }
+      .project-link {
+        display: inline-flex;
+        margin-top: 12px;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .education-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .education-card,
+      .cert-card {
+        padding: 20px;
+      }
+      .education-card + .education-card {
+        margin-top: 12px;
+      }
+      .education-card span,
+      .cert-item span {
+        color: var(--muted);
+        font-size: 0.83rem;
+      }
+      .cert-list {
+        display: grid;
+        gap: 12px;
+      }
+      .cert-item {
+        padding: 13px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .cert-item:last-child {
+        border-bottom: 0;
+      }
+      .cert-item strong {
+        display: block;
+      }
+
+      .contact-card {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 28px;
+        align-items: center;
+        background: linear-gradient(135deg, #071426, #0d2a49);
+        color: #dce8f5;
+        padding: 32px;
+        border-radius: 28px;
+        box-shadow: 0 28px 70px rgba(7, 20, 38, 0.2);
+      }
+      .contact-card::after {
+        content: "";
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        right: -110px;
+        top: -120px;
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.5),
+          transparent 67%
+        );
+      }
+      .contact-card h2 {
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .contact-card p {
+        color: #a9bfd4;
+        margin-bottom: 0;
+      }
+      .contact-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+      }
+      .contact-actions .btn-secondary {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.18);
+      }
+      footer {
+        padding: 28px 0 34px;
+        color: #6c7e92;
+        font-size: 0.84rem;
+      }
+      .footer-wrap {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      footer a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* Compact resume sections: less scrolling, denser information */
+      #skills.section,
+      #experience.section {
+        padding: 52px 0;
+      }
+      #skills .section-head,
+      #experience .section-head {
+        margin-bottom: 24px;
+        gap: 28px;
+      }
+      #skills .skills-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+      #skills .skill-card {
+        padding: 15px 16px;
+        border-radius: 16px;
+        box-shadow: 0 7px 20px rgba(15, 35, 58, 0.055);
+      }
+      #skills .skill-icon {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 9px;
+        border-radius: 9px;
+        font-size: 0.72rem;
+        font-weight: 600;
+      }
+      #skills .skill-card h3 {
+        font-size: 0.93rem;
+        margin-bottom: 5px;
+      }
+      #skills .skill-card p {
+        font-size: 0.82rem;
+        line-height: 1.48;
+      }
+      /* The text already lists the same technologies, so suppress duplicate pills here. */
+      #skills .skill-card .tags {
+        display: none;
+      }
+
+      #experience .experience-list {
+        gap: 12px;
+      }
+      #experience .experience-card {
+        grid-template-columns: 175px 1fr;
+        gap: 16px;
+        padding: 15px 17px;
+        border-radius: 16px;
+        box-shadow: 0 7px 20px rgba(15, 35, 58, 0.055);
+      }
+      #experience .experience-time strong {
+        font-size: 0.86rem;
+        font-weight: 600;
+      }
+      #experience .experience-time span {
+        font-size: 0.76rem;
+      }
+      #experience .role-company {
+        font-size: 0.81rem;
+        margin-bottom: 1px;
+      }
+      #experience .role h3 {
+        font-size: 0.98rem;
+        margin-bottom: 3px;
+      }
+      #experience .role ul {
+        columns: 2;
+        column-gap: 30px;
+        margin: 8px 0 0;
+        padding-left: 17px;
+        font-size: 0.81rem;
+        line-height: 1.45;
+      }
+      #experience .role li {
+        margin: 0 0 6px;
+        break-inside: avoid;
+      }
+
+      @media (max-width: 1040px) {
+        .hero-grid,
+        .section-head {
+          grid-template-columns: 1fr;
+        }
+        #skills .skills-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+        .project-card.featured {
+          grid-row: auto;
+        }
+      }
+      @media (max-width: 820px) {
+        .menu-button {
+          display: block;
+        }
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 74px;
+          left: 19px;
+          right: 19px;
+          padding: 12px;
+          flex-direction: column;
+          align-items: stretch;
+          background: #fff;
+          border: 1px solid var(--line);
+          border-radius: 15px;
+          box-shadow: var(--shadow);
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .nav-links .resume-nav {
+          margin-left: 0;
+          text-align: center;
+        }
+        #experience .experience-card {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+        #experience .role ul {
+          columns: 1;
+        }
+        .education-grid,
+        .contact-card {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 580px) {
+        .container {
+          width: min(100% - 24px, 1180px);
+        }
+        .section {
+          padding: 56px 0;
+        }
+        .hero {
+          padding-top: 52px;
+        }
+        #skills .skills-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .quick-stats {
+          grid-template-columns: 1fr 1fr;
+        }
+        .quick-stats div:last-child {
+          grid-column: 1 / -1;
+        }
+        .contact-card {
+          padding: 28px 22px;
+        }
+        #skills .skills-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      /* ---------- AI Job Apply: alternate in-file view ---------- */
+      .jobapp-demo-view {
+        display: none;
+        min-height: 100vh;
+        background: #f3f6fb;
+        color: #152238;
+      }
+      body.jobapp-open {
+        overflow-x: hidden;
+        background: #f3f6fb;
+      }
+      body.jobapp-open #portfolioView {
+        display: none;
+      }
+      body.jobapp-open .jobapp-demo-view {
+        display: block;
+      }
+
+      .demo-launch {
+        margin-top: 18px;
+        padding: 10px 14px;
+        border: 1px solid #c9daf1;
+        border-radius: 12px;
+        background: #f7fbff;
+        transition: 0.18s ease;
+      }
+      .demo-launch:hover {
+        text-decoration: none;
+        transform: translateY(-1px);
+        background: #eef6ff;
+      }
+
+      .ja-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 80;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 0 28px;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid #dfe7f2;
+      }
+      .ja-brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+      }
+      .ja-brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        box-shadow: 0 9px 22px rgba(37, 99, 235, 0.25);
+      }
+      .ja-brand small {
+        display: block;
+        margin-top: 1px;
+        color: #7a889d;
+        font-family: "Inter", sans-serif;
+        font-size: 0.69rem;
+        font-weight: 600;
+      }
+      .ja-back {
+        text-decoration: none;
+        color: #334155;
+        font-size: 0.88rem;
+        font-weight: 600;
+        padding: 9px 13px;
+        border: 1px solid #dbe4ef;
+        border-radius: 11px;
+        background: #fff;
+      }
+      .ja-back:hover {
+        color: #1d4ed8;
+        border-color: #b9cdf0;
+      }
+
+      .ja-shell {
+        width: min(1440px, 100%);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 238px 1fr;
+        min-height: calc(100vh - 70px);
+      }
+      .ja-sidebar {
+        padding: 24px 16px;
+        background: #0b172a;
+        color: #dbe8f8;
+        border-right: 1px solid #18304f;
+      }
+      .ja-side-label {
+        padding: 0 10px 9px;
+        color: #7890ae;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.68rem;
+        font-weight: 600;
+      }
+      .ja-nav {
+        display: grid;
+        gap: 5px;
+      }
+      .ja-nav button {
+        width: 100%;
+        border: 0;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 12px;
+        border-radius: 10px;
+        color: #aebfd3;
+        background: transparent;
+        font:
+          700 0.86rem "Inter",
+          sans-serif;
+        cursor: pointer;
+      }
+      .ja-nav button:hover,
+      .ja-nav button.active {
+        background: #142b49;
+        color: #fff;
+      }
+      .ja-nav .nav-icon {
+        width: 27px;
+        height: 27px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.06);
+        font-size: 0.72rem;
+      }
+      .ja-sidebar-note {
+        margin-top: 28px;
+        padding: 14px;
+        border: 1px solid #243d5d;
+        border-radius: 13px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+      .ja-sidebar-note strong {
+        display: block;
+        font-size: 0.82rem;
+        color: #edf5ff;
+      }
+      .ja-sidebar-note p {
+        margin: 5px 0 0;
+        color: #8da3bd;
+        font-size: 0.74rem;
+        line-height: 1.55;
+      }
+
+      .ja-main {
+        min-width: 0;
+        padding: 30px;
+      }
+      .ja-tab {
+        display: none;
+      }
+      .ja-tab.active {
+        display: block;
+        animation: jaFade 0.2s ease;
+      }
+      @keyframes jaFade {
+        from {
+          opacity: 0.3;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .ja-page-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 22px;
+      }
+      .ja-page-head h1 {
+        margin: 0;
+        font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+        letter-spacing: -0.025em;
+      }
+      .ja-page-head p {
+        margin: 7px 0 0;
+        color: #718096;
+        font-size: 0.9rem;
+      }
+      .ja-build-badge {
+        white-space: nowrap;
+        padding: 8px 11px;
+        border: 1px solid #cce3d6;
+        border-radius: 999px;
+        background: #f0fbf4;
+        color: #16723d;
+        font-size: 0.72rem;
+        font-weight: 600;
+      }
+      .ja-build-badge i {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #22c55e;
+        margin-right: 6px;
+      }
+
+      .ja-grid {
+        display: grid;
+        gap: 16px;
+      }
+      .ja-grid.two {
+        grid-template-columns: 1.22fr 0.78fr;
+      }
+      .ja-card {
+        background: #fff;
+        border: 1px solid #dce5f0;
+        border-radius: 17px;
+        box-shadow: 0 11px 28px rgba(29, 50, 78, 0.055);
+        overflow: hidden;
+      }
+      .ja-card-pad {
+        padding: 20px;
+      }
+      .ja-card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+      .ja-card-head h2 {
+        margin: 0;
+        font-size: 1.02rem;
+      }
+      .ja-card-head p {
+        margin: 5px 0 0;
+        color: #7b8a9f;
+        font-size: 0.8rem;
+      }
+      .ja-chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 8px;
+        border-radius: 999px;
+        background: #eef4ff;
+        border: 1px solid #d6e3ff;
+        color: #315ea8;
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+      .ja-chip.green {
+        background: #effaf3;
+        border-color: #d3eddd;
+        color: #247144;
+      }
+      .ja-chip.amber {
+        background: #fff8e8;
+        border-color: #f4dfb2;
+        color: #8a6118;
+      }
+      .ja-chip.red {
+        background: #fff0f1;
+        border-color: #f3d0d4;
+        color: #a53a46;
+      }
+
+      .ja-searchbar {
+        display: grid;
+        grid-template-columns: 1.2fr 0.9fr 0.85fr 0.75fr auto;
+        gap: 10px;
+        align-items: end;
+      }
+      .ja-field {
+        padding: 10px 11px;
+        border: 1px solid #dce5f0;
+        border-radius: 11px;
+        background: #f9fbfd;
+      }
+      .ja-field span {
+        display: block;
+        color: #8a98aa;
+        font-size: 0.66rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.045em;
+      }
+      .ja-field strong {
+        display: block;
+        margin-top: 3px;
+        color: #26354b;
+        font-size: 0.82rem;
+      }
+      .ja-primary {
+        min-height: 45px;
+        border: 0;
+        border-radius: 11px;
+        padding: 0 16px;
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: white;
+        font-weight: 800;
+        font-size: 0.8rem;
+      }
+
+      .ja-job {
+        display: grid;
+        grid-template-columns: 42px 1fr auto;
+        gap: 12px;
+        align-items: start;
+        padding: 14px 0;
+        border-top: 1px solid #edf1f6;
+      }
+      .ja-job:first-of-type {
+        border-top: 0;
+        padding-top: 0;
+      }
+      .ja-company {
+        width: 42px;
+        height: 42px;
+        border-radius: 11px;
+        display: grid;
+        place-items: center;
+        background: #edf3fb;
+        color: #244c82;
+        font-weight: 900;
+        font-size: 0.78rem;
+      }
+      .ja-job h3 {
+        margin: 0;
+        font-size: 0.91rem;
+      }
+      .ja-job p {
+        margin: 3px 0 7px;
+        color: #7c8a9d;
+        font-size: 0.74rem;
+      }
+      .ja-job-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .ja-job-tags span {
+        padding: 3px 7px;
+        border-radius: 999px;
+        background: #f4f7fb;
+        border: 1px solid #e4eaf2;
+        color: #617086;
+        font-size: 0.64rem;
+        font-weight: 700;
+      }
+      .ja-match {
+        text-align: right;
+        min-width: 92px;
+      }
+      .ja-match strong {
+        display: block;
+        color: #216e45;
+        font-size: 0.9rem;
+      }
+      .ja-match span {
+        color: #8795a8;
+        font-size: 0.65rem;
+      }
+      .ja-job-action {
+        margin-top: 8px;
+        border: 1px solid #cddbef;
+        background: #fff;
+        color: #2456a5;
+        border-radius: 8px;
+        padding: 5px 8px;
+        font-size: 0.67rem;
+        font-weight: 800;
+      }
+
+      .ja-status-list {
+        display: grid;
+        gap: 9px;
+      }
+      .ja-status-row {
+        display: grid;
+        grid-template-columns: 12px 1fr auto;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 11px;
+        border: 1px solid #e3eaf2;
+        border-radius: 11px;
+        background: #fbfcfe;
+      }
+      .ja-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #94a3b8;
+      }
+      .ja-status-row strong {
+        font-size: 0.78rem;
+      }
+      .ja-status-row small {
+        display: block;
+        color: #8391a3;
+        font-size: 0.67rem;
+        margin-top: 1px;
+      }
+      .ja-status-row .state {
+        font-size: 0.65rem;
+        font-weight: 800;
+        color: #617086;
+      }
+      .ja-status-row.prepared .ja-status-dot {
+        background: #2563eb;
+      }
+      .ja-status-row.review .ja-status-dot {
+        background: #f59e0b;
+      }
+      .ja-status-row.submitted .ja-status-dot {
+        background: #16a34a;
+      }
+      .ja-status-row.failed .ja-status-dot {
+        background: #dc2626;
+      }
+      .ja-status-row.submitted {
+        background: #f5fcf7;
+        border-color: #d8eddf;
+      }
+      .ja-status-row.failed {
+        background: #fff8f8;
+        border-color: #f0d9dc;
+      }
+
+      .ja-pipeline {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        align-items: stretch;
+      }
+      .ja-step {
+        position: relative;
+        padding: 14px 12px;
+        border: 1px solid #dce5f0;
+        border-radius: 12px;
+        background: #fff;
+      }
+      .ja-step b {
+        width: 26px;
+        height: 26px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: #eaf1ff;
+        color: #295fb3;
+        font-size: 0.72rem;
+      }
+      .ja-step strong {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.75rem;
+      }
+      .ja-step span {
+        display: block;
+        margin-top: 4px;
+        color: #8492a5;
+        font-size: 0.65rem;
+        line-height: 1.45;
+      }
+
+      .ja-api-list {
+        display: grid;
+        gap: 8px;
+      }
+      .ja-api {
+        display: grid;
+        grid-template-columns: 58px 1fr;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 11px;
+        border: 1px solid #e0e7f0;
+        border-radius: 10px;
+        background: #fbfcfe;
+      }
+      .ja-method {
+        font:
+          800 0.65rem "Inter",
+          sans-serif;
+        color: #2459aa;
+      }
+      .ja-api code {
+        font-size: 0.73rem;
+        color: #334155;
+      }
+      .ja-api small {
+        display: block;
+        color: #8996a7;
+        margin-top: 2px;
+        font-size: 0.63rem;
+      }
+
+      .ja-arch {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+        padding: 14px 16px;
+        background: #0e1e33;
+        color: #c9d8ea;
+        border-radius: 13px;
+      }
+      .ja-arch span {
+        padding: 6px 9px;
+        border: 1px solid #29425f;
+        border-radius: 8px;
+        background: #132842;
+        font-size: 0.67rem;
+        font-weight: 800;
+      }
+      .ja-arch b {
+        color: #5f7895;
+        font-size: 0.72rem;
+      }
+      .ja-note {
+        margin: 14px 0 0;
+        color: #7c8999;
+        font-size: 0.72rem;
+      }
+
+      .ja-application-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 720px;
+      }
+      .ja-application-table th,
+      .ja-application-table td {
+        padding: 11px 12px;
+        border-bottom: 1px solid #e8edf3;
+        text-align: left;
+        font-size: 0.73rem;
+      }
+      .ja-application-table th {
+        color: #748399;
+        background: #f8fafc;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .ja-application-table td strong {
+        font-size: 0.76rem;
+      }
+      .ja-table-wrap {
+        overflow: auto;
+      }
+      .ja-muted {
+        color: #8492a4;
+      }
+      .ja-good {
+        color: #197a44;
+        font-weight: 800;
+      }
+      .ja-warn {
+        color: #9a6617;
+        font-weight: 800;
+      }
+      .ja-bad {
+        color: #b23d48;
+        font-weight: 800;
+      }
+
+      .ja-profile-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .ja-profile-item {
+        padding: 14px;
+        border: 1px solid #e2e8f0;
+        border-radius: 11px;
+        background: #fbfcfe;
+      }
+      .ja-profile-item span {
+        display: block;
+        color: #8996a8;
+        font-size: 0.66rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        font-weight: 700;
+      }
+      .ja-profile-item strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 1100px) {
+        .ja-searchbar {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .ja-primary {
+          grid-column: span 2;
+        }
+        .ja-grid.two {
+          grid-template-columns: 1fr;
+        }
+        .ja-pipeline {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 780px) {
+        .ja-topbar {
+          padding: 0 14px;
+        }
+        .ja-shell {
+          grid-template-columns: 1fr;
+        }
+        .ja-sidebar {
+          padding: 10px 12px;
+          border-right: 0;
+          border-bottom: 1px solid #18304f;
+        }
+        .ja-side-label,
+        .ja-sidebar-note {
+          display: none;
+        }
+        .ja-nav {
+          display: flex;
+          overflow: auto;
+          gap: 6px;
+        }
+        .ja-nav button {
+          width: auto;
+          white-space: nowrap;
+          padding: 8px 10px;
+        }
+        .ja-main {
+          padding: 20px 14px 28px;
+        }
+        .ja-page-head {
+          align-items: start;
+          flex-direction: column;
+        }
+        .ja-build-badge {
+          white-space: normal;
+        }
+      }
+      @media (max-width: 560px) {
+        .ja-brand small {
+          display: none;
+        }
+        .ja-searchbar {
+          grid-template-columns: 1fr;
+        }
+        .ja-primary {
+          grid-column: auto;
+        }
+        .ja-job {
+          grid-template-columns: 36px 1fr;
+        }
+        .ja-company {
+          width: 36px;
+          height: 36px;
+        }
+        .ja-match {
+          grid-column: 2;
+          text-align: left;
+        }
+        .ja-pipeline,
+        .ja-profile-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 420px) {
+        #skills .skills-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="portfolioView">
+      <header class="site-header" id="top">
+        <div class="container nav-wrap">
+          <a class="brand" href="#top" aria-label="Sai Teja home"
+            ><span class="brand-mark">ST</span><span>Sai Teja</span></a
+          >
+          <button
+            class="menu-button"
+            id="menuButton"
+            aria-expanded="false"
+            aria-controls="siteNav"
+            aria-label="Toggle navigation"
+          >
+            <span></span><span></span><span></span>
+          </button>
+          <nav class="nav-links" id="siteNav" aria-label="Primary navigation">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a
+              class="resume-nav"
+              href="assets/Sai_Teja_Chigulapally_Resume.docx"
+              download
+              >Resume ↓</a
+            >
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="container hero-grid">
+            <div class="hero-copy reveal">
+              <div class="availability">
+                <i></i> Full Stack Java Developer · GCP & Dataflow
+              </div>
+              <h1>Full Stack Java Developer</h1>
+              <p class="hero-stack">
+                Java 17+ · Spring Boot 3.x · React.js · Angular · GCP · Dataflow
+              </p>
+              <p>
+                I’m <strong>Sai Teja Chigulapally</strong>, a Full Stack
+                Developer with 5 years of experience building Java and Spring
+                Boot applications, responsive web interfaces, microservices and
+                Google Cloud data pipelines. My work combines scalable backend
+                engineering, frontend delivery, automation, reliability and
+                CI/CD.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#projects"
+                  >Explore Projects →</a
+                >
+                <a
+                  class="btn btn-secondary"
+                  href="assets/Sai_Teja_Chigulapally_Resume.docx"
+                  download
+                  >Download Resume ↓</a
+                >
+              </div>
+              <div class="hero-meta">
+                <a
+                  href="https://www.linkedin.com/in/c-sai-teja-0b5221124"
+                  target="_blank"
+                  rel="noreferrer"
+                  >LinkedIn ↗</a
+                >
+                <a href="#ai-job-demo" data-open-jobapp
+                  >Open AI Job Apply Demo ↗</a
+                >
+              </div>
+            </div>
+
+            <aside
+              class="profile-card reveal"
+              aria-label="Developer profile summary"
+            >
+              <div class="terminal-head">
+                <div class="terminal-dots"><i></i><i></i><i></i></div>
+                <span>Professional highlights</span>
+              </div>
+              <p class="profile-summary">
+                Experienced in enterprise backend services, cloud-native data
+                processing, and modern frontend delivery.
+              </p>
+              <ul class="profile-points">
+                <li>
+                  Java 17+, Spring Boot 3.x, REST API design and microservices.
+                </li>
+                <li>
+                  Google Cloud Dataflow, Apache Beam, BigQuery and Cloud
+                  Composer.
+                </li>
+                <li>
+                  React.js and Angular interfaces with production-focused CI/CD
+                  practices.
+                </li>
+              </ul>
+              <div class="quick-stats">
+                <div><strong>5</strong><span>Years experience</span></div>
+                <div><strong>150+</strong><span>DSA problems</span></div>
+                <div><strong>3</strong><span>Cloud platforms</span></div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section section-soft" id="about">
+          <div class="container section-head reveal">
+            <div>
+              <p class="kicker">01 · About</p>
+              <h2>Cloud-first full stack engineering.</h2>
+            </div>
+            <div>
+              <p>
+                My experience spans enterprise Java applications, Spring Boot
+                microservices, frontend development and cloud data processing.
+                At American Express, I work with Java 17+, Spring Boot 3.x, REST
+                APIs, Apache Beam, Google Cloud Dataflow, Airflow/Cloud Composer
+                and GCP services. I also build independent products that combine
+                full stack development with automation and AI.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="skills">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <p class="kicker">02 · Technical Skills</p>
+                <h2>Tools I use to build, ship and operate software.</h2>
+              </div>
+              <p>
+                Backend services, user interfaces, cloud data pipelines,
+                orchestration, databases, testing and containerized deployment.
+              </p>
+            </div>
+            <div class="skills-grid">
+              <article class="skill-card reveal">
+                <div class="skill-icon">BE</div>
+                <h3>Backend</h3>
+                <p>
+                  Java, Spring, Spring Boot, Spring MVC, Spring Data JPA,
+                  Hibernate, REST APIs, Python, Django, Node.js and Express.js.
+                </p>
+                <div class="tags">
+                  <span class="tag">Java 17+</span
+                  ><span class="tag">Spring Boot 3.x</span
+                  ><span class="tag">REST</span><span class="tag">Django</span>
+                </div>
+              </article>
+              <article class="skill-card reveal">
+                <div class="skill-icon">UI</div>
+                <h3>Frontend</h3>
+                <p>
+                  React.js, Angular, TypeScript, JavaScript, HTML5, CSS3, Redux,
+                  NGRX, Bootstrap, jQuery and AJAX.
+                </p>
+                <div class="tags">
+                  <span class="tag">React.js</span
+                  ><span class="tag">Angular</span
+                  ><span class="tag">TypeScript</span
+                  ><span class="tag">HTML/CSS</span>
+                </div>
+              </article>
+              <article class="skill-card reveal">
+                <div class="skill-icon">GC</div>
+                <h3>GCP & Data</h3>
+                <p>
+                  Google Cloud Platform, Dataflow, Apache Beam, BigQuery,
+                  Pub/Sub, Bigtable, Cloud Storage, Secret Manager and Cloud
+                  Composer.
+                </p>
+                <div class="tags">
+                  <span class="tag">Dataflow</span
+                  ><span class="tag">Apache Beam</span
+                  ><span class="tag">BigQuery</span
+                  ><span class="tag">Bigtable</span>
+                </div>
+              </article>
+              <article class="skill-card reveal">
+                <div class="skill-icon">DO</div>
+                <h3>DevOps & Runtime</h3>
+                <p>
+                  Docker, Jenkins, GitHub Actions, GKE, Cloud Run, CI/CD,
+                  Airflow DAGs and Dataflow Flex Templates.
+                </p>
+                <div class="tags">
+                  <span class="tag">Docker</span><span class="tag">GKE</span
+                  ><span class="tag">Cloud Run</span
+                  ><span class="tag">CI/CD</span>
+                </div>
+              </article>
+              <article class="skill-card reveal">
+                <div class="skill-icon">DB</div>
+                <h3>Databases</h3>
+                <p>
+                  MySQL, MongoDB, DynamoDB, Oracle, SQL, CRUD operations and
+                  application data integration.
+                </p>
+                <div class="tags">
+                  <span class="tag">MySQL</span><span class="tag">MongoDB</span
+                  ><span class="tag">Oracle</span><span class="tag">SQL</span>
+                </div>
+              </article>
+              <article class="skill-card reveal">
+                <div class="skill-icon">QA</div>
+                <h3>Quality</h3>
+                <p>
+                  JUnit, Mockito, Jasmine, Karma, Postman, validation, exception
+                  handling, health checks and monitoring.
+                </p>
+                <div class="tags">
+                  <span class="tag">JUnit</span><span class="tag">Mockito</span
+                  ><span class="tag">Postman</span
+                  ><span class="tag">Actuator</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section-soft" id="experience">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <p class="kicker">03 · Experience</p>
+                <h2>
+                  Enterprise applications, data pipelines and full stack
+                  delivery.
+                </h2>
+              </div>
+              <p>
+                Experience across Java microservices, Angular/React user
+                interfaces, Google Cloud data processing and test-driven
+                delivery.
+              </p>
+            </div>
+            <div class="experience-list">
+              <article class="experience-card reveal">
+                <div class="experience-time">
+                  <strong>Aug 2024 — Present</strong
+                  ><span>Phoenix, Arizona</span>
+                </div>
+                <div class="role">
+                  <p class="role-company">American Express</p>
+                  <h3>Full Stack Developer</h3>
+                  <ul>
+                    <li>
+                      Develop and maintain enterprise-grade applications using
+                      Java 17+, Spring Boot 3.x, Spring MVC, Spring Data JPA,
+                      Hibernate and RESTful APIs.
+                    </li>
+                    <li>
+                      Design Spring Boot microservices with embedded Tomcat,
+                      Spring Actuator health checks, centralized exception
+                      handling, validation, logging and configuration
+                      management.
+                    </li>
+                    <li>
+                      Develop Google Cloud Dataflow pipelines using Apache Beam
+                      and Java for structured and unstructured enterprise data.
+                    </li>
+                    <li>
+                      Design batch and streaming Dataflow jobs for ingestion,
+                      transformation, enrichment, validation and downstream GCP
+                      processing.
+                    </li>
+                    <li>
+                      Create Airflow/Cloud Composer workflows using
+                      PythonOperator, BashOperator, BigQueryInsertJobOperator,
+                      TriggerDagRunOperator and
+                      DataflowStartFlexTemplateOperator.
+                    </li>
+                    <li>
+                      Integrate Spring Boot applications with BigQuery, Cloud
+                      Storage, Pub/Sub, Bigtable and Secret Manager.
+                    </li>
+                    <li>
+                      Containerize Spring Boot applications and Dataflow Flex
+                      Templates with Docker for GKE and Cloud Run deployments.
+                    </li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="experience-card reveal">
+                <div class="experience-time">
+                  <strong>Jan 2023 — Mar 2023</strong
+                  ><span>Fairfield, Connecticut</span>
+                </div>
+                <div class="role">
+                  <p class="role-company">Sacred Heart University</p>
+                  <h3>Tutor</h3>
+                  <ul>
+                    <li>
+                      Conducted experiments, supported faculty research
+                      projects, led discussion groups and assisted in course
+                      material preparation.
+                    </li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="experience-card reveal">
+                <div class="experience-time">
+                  <strong>May 2021 — Aug 2022</strong
+                  ><span>Hyderabad, India</span>
+                </div>
+                <div class="role">
+                  <p class="role-company">Tata Consultancy Services</p>
+                  <h3>Software Developer</h3>
+                  <ul>
+                    <li>
+                      Developed presentation-layer features with JSP, HTML5,
+                      CSS3 and JavaScript and implemented client-side
+                      validation.
+                    </li>
+                    <li>
+                      Built and validated complex user input forms using Angular
+                      Forms and Validators.
+                    </li>
+                    <li>
+                      Implemented Spring Boot microservices to modularize
+                      application functionality.
+                    </li>
+                    <li>
+                      Collaborated with QA on unit-test development using JUnit
+                      and Mockito in an Agile/Scrum environment.
+                    </li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="experience-card reveal">
+                <div class="experience-time">
+                  <strong>Aug 2020 — Apr 2021</strong
+                  ><span>Hyderabad, India</span>
+                </div>
+                <div class="role">
+                  <p class="role-company">Optimized Solutions</p>
+                  <h3>Web Developer</h3>
+                  <ul>
+                    <li>
+                      Developed a Django web application for managing tasks and
+                      appointments.
+                    </li>
+                    <li>
+                      Created responsive layouts using CSS Grid and Flexbox and
+                      developed web pages using Angular and React.
+                    </li>
+                    <li>Wrote frontend tests using Jasmine and Karma.</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="projects">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <p class="kicker">04 · Projects</p>
+                <h2>Products built across full stack, automation and AI.</h2>
+              </div>
+              <p>
+                Projects from the resume, presented as portfolio-ready product
+                work without adding unsupported metrics.
+              </p>
+            </div>
+            <div class="project-grid">
+              <article class="project-card featured reveal ai-project-card">
+                <span class="project-label">Featured project</span>
+                <h3>AI Job Apply Platform</h3>
+                <p>
+                  Full-stack job automation platform built with React/Vite and
+                  FastAPI, with Dice search, resume/profile matching,
+                  Playwright-driven application preparation, review controls and
+                  application-status tracking.
+                </p>
+                <div class="tags">
+                  <span class="tag">React / Vite</span
+                  ><span class="tag">FastAPI</span
+                  ><span class="tag">Playwright</span
+                  ><span class="tag">Dice</span><span class="tag">SQLite</span
+                  ><span class="tag">NLP Matching</span>
+                </div>
+                <a
+                  class="project-link demo-launch"
+                  href="#ai-job-demo"
+                  data-open-jobapp
+                >
+                  Open Demo <span aria-hidden="true">→</span>
+                </a>
+              </article>
+
+              <article class="project-card reveal">
+                <span class="project-label">Full Stack</span>
+                <h3>Farm Easy</h3>
+                <p>
+                  Full-stack web application built across frontend, backend and
+                  database layers.
+                </p>
+                <ul class="project-list">
+                  <li>Responsive JavaScript, HTML5 and CSS3 UI.</li>
+                  <li>Python + Django backend.</li>
+                  <li>
+                    RESTful functionality, CRUD operations, validation and
+                    database integration.
+                  </li>
+                </ul>
+                <div class="tags">
+                  <span class="tag">JavaScript</span
+                  ><span class="tag">HTML5</span><span class="tag">CSS3</span
+                  ><span class="tag">Python</span
+                  ><span class="tag">Django</span>
+                </div>
+              </article>
+
+              <article class="project-card reveal">
+                <span class="project-label">Mobile</span>
+                <h3>Hatao</h3>
+                <p>
+                  Android application for vehicle-based driver communication
+                  using Firebase with a Node.js backend.
+                </p>
+                <div class="tags">
+                  <span class="tag">Android</span
+                  ><span class="tag">Firebase</span
+                  ><span class="tag">Node.js</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section-soft" id="education">
+          <div class="container education-grid">
+            <div class="reveal">
+              <p class="kicker">05 · Education</p>
+              <h2>Computer science foundation.</h2>
+              <div class="education-card">
+                <span>2022 — 2023</span>
+                <h3>Master’s in Computer Science</h3>
+                <p class="muted">Sacred Heart University</p>
+              </div>
+              <div class="education-card">
+                <span>2016 — 2020</span>
+                <h3>Bachelor of Technology in Computer Science</h3>
+                <p class="muted">
+                  Gandhi Institute of Technology and Management (GITAM)
+                </p>
+              </div>
+            </div>
+            <div class="reveal">
+              <p class="kicker">06 · Certifications</p>
+              <h2>Continuous learning.</h2>
+              <div class="cert-card">
+                <div class="cert-list">
+                  <div class="cert-item">
+                    <strong>Python Programming</strong
+                    ><span
+                      >National Accreditation Board for Certification Bodies
+                      (NABCB)</span
+                    >
+                  </div>
+                  <div class="cert-item">
+                    <strong>Android Development</strong
+                    ><span>BareLogic Solutions Pvt Ltd</span>
+                  </div>
+                  <div class="cert-item">
+                    <strong>Web Development</strong><span>Udemy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container contact-card reveal">
+            <div>
+              <p class="kicker" style="color: #7dd3fc">Let’s connect</p>
+              <h2>
+                Full stack, Java, cloud or data engineering opportunities?
+              </h2>
+              <p>
+                View my LinkedIn profile or download the latest resume directly
+                from this portfolio.
+              </p>
+            </div>
+            <div class="contact-actions">
+              <a
+                class="btn btn-primary"
+                href="https://www.linkedin.com/in/c-sai-teja-0b5221124"
+                target="_blank"
+                rel="noreferrer"
+                >View LinkedIn ↗</a
+              ><a
+                class="btn btn-secondary"
+                href="assets/Sai_Teja_Chigulapally_Resume.docx"
+                download
+                >Download Resume ↓</a
+              >
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container footer-wrap">
+          <span>© 2026 Sai Teja Chigulapally</span
+          ><a href="#top">Back to top ↑</a>
+        </div>
+      </footer>
+    </div>
+
+    <section id="jobappDemoView" class="jobapp-demo-view" aria-hidden="true">
+      <header class="ja-topbar">
+        <div class="ja-brand">
+          <span class="ja-brand-mark">AI</span>
+          <span>Job Apply<small>FastAPI + React/Vite + Playwright</small></span>
+        </div>
+        <a class="ja-back" href="#projects" data-close-jobapp
+          >← Back to Portfolio</a
+        >
+      </header>
+
+      <div class="ja-shell">
+        <aside class="ja-sidebar">
+          <div class="ja-side-label">Workspace</div>
+          <nav class="ja-nav" aria-label="AI Job Apply demo navigation">
+            <button class="active" type="button" data-ja-tab="dashboard">
+              <span class="nav-icon">01</span>Dashboard
+            </button>
+            <button type="button" data-ja-tab="search">
+              <span class="nav-icon">02</span>Search Jobs
+            </button>
+            <button type="button" data-ja-tab="applications">
+              <span class="nav-icon">03</span>Applications
+            </button>
+            <button type="button" data-ja-tab="profile">
+              <span class="nav-icon">04</span>Profile
+            </button>
+          </nav>
+          <div class="ja-sidebar-note">
+            <strong>Static portfolio demo</strong>
+            <p>
+              UI reflects the current JobApp architecture and workflows. It does
+              not submit live applications.
+            </p>
+          </div>
+        </aside>
+
+        <main class="ja-main">
+          <section class="ja-tab active" data-ja-panel="dashboard">
+            <div class="ja-page-head">
+              <div>
+                <h1>Job Application Dashboard</h1>
+                <p>
+                  Search real Dice jobs, score fit, prepare applications and
+                  track each application state.
+                </p>
+              </div>
+              <div class="ja-build-badge"><i></i>Current build workflow</div>
+            </div>
+
+            <div class="ja-card ja-card-pad" style="margin-bottom: 16px">
+              <div class="ja-card-head">
+                <div>
+                  <h2>Search configuration</h2>
+                  <p>Filters modeled after the current Dice search workflow.</p>
+                </div>
+                <span class="ja-chip">Dice portal</span>
+              </div>
+              <div class="ja-searchbar">
+                <div class="ja-field">
+                  <span>Role</span><strong>Java Full Stack Developer</strong>
+                </div>
+                <div class="ja-field">
+                  <span>Location</span><strong>United States</strong>
+                </div>
+                <div class="ja-field">
+                  <span>Posted</span><strong>Last 7 days</strong>
+                </div>
+                <div class="ja-field">
+                  <span>Apply filter</span><strong>Easy Apply</strong>
+                </div>
+                <button class="ja-primary" type="button" data-ja-goto="search">
+                  Search Jobs
+                </button>
+              </div>
+            </div>
+
+            <div class="ja-grid two">
+              <article class="ja-card ja-card-pad">
+                <div class="ja-card-head">
+                  <div>
+                    <h2>Job results</h2>
+                    <p>
+                      Result cards use fields produced by the Dice integration.
+                    </p>
+                  </div>
+                  <span class="ja-chip green">Quick scoring</span>
+                </div>
+                <div class="ja-job">
+                  <div class="ja-company">HC</div>
+                  <div>
+                    <h3>Java Full Stack Developer</h3>
+                    <p>
+                      HCM Staffing and Consulting · Hybrid in Chicago, Illinois
+                    </p>
+                    <div class="ja-job-tags">
+                      <span>portal: dice</span><span>status: new</span
+                      ><span>matched: Java</span>
+                    </div>
+                  </div>
+                  <div class="ja-match">
+                    <strong>Quick match</strong><span>skills + profile</span
+                    ><button
+                      class="ja-job-action"
+                      type="button"
+                      data-ja-goto="search"
+                    >
+                      Review
+                    </button>
+                  </div>
+                </div>
+                <div class="ja-job">
+                  <div class="ja-company">TS</div>
+                  <div>
+                    <h3>Java Fullstack Developer</h3>
+                    <p>TechSpace Solutions Inc. · Dallas, Texas</p>
+                    <div class="ja-job-tags">
+                      <span>portal: dice</span><span>status: new</span
+                      ><span>score_status: quick</span>
+                    </div>
+                  </div>
+                  <div class="ja-match">
+                    <strong>Match details</strong
+                    ><span>matched / missing skills</span
+                    ><button
+                      class="ja-job-action"
+                      type="button"
+                      data-ja-goto="search"
+                    >
+                      Review
+                    </button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="ja-card ja-card-pad">
+                <div class="ja-card-head">
+                  <div>
+                    <h2>Application lifecycle</h2>
+                    <p>
+                      States used by the preparation and submission workflow.
+                    </p>
+                  </div>
+                </div>
+                <div class="ja-status-list">
+                  <div class="ja-status-row">
+                    <i class="ja-status-dot"></i>
+                    <div>
+                      <strong>New job</strong
+                      ><small>Discovered and stored from portal search</small>
+                    </div>
+                    <span class="state">NEW</span>
+                  </div>
+                  <div class="ja-status-row prepared">
+                    <i class="ja-status-dot"></i>
+                    <div>
+                      <strong>Prepared</strong
+                      ><small
+                        >Application flow opened and fields prepared</small
+                      >
+                    </div>
+                    <span class="state">PREPARED</span>
+                  </div>
+                  <div class="ja-status-row review">
+                    <i class="ja-status-dot"></i>
+                    <div>
+                      <strong>Review required</strong
+                      ><small>Candidate confirmation is needed</small>
+                    </div>
+                    <span class="state">REVIEW</span>
+                  </div>
+                  <div class="ja-status-row submitted">
+                    <i class="ja-status-dot"></i>
+                    <div>
+                      <strong>Submitted / already applied</strong
+                      ><small
+                        >Applied jobs stay applied and are not returned to
+                        Prepare Apply</small
+                      >
+                    </div>
+                    <span class="state">APPLIED</span>
+                  </div>
+                  <div class="ja-status-row failed">
+                    <i class="ja-status-dot"></i>
+                    <div>
+                      <strong>Auto submit failed</strong
+                      ><small
+                        >Failure retained with apply URL and application
+                        record</small
+                      >
+                    </div>
+                    <span class="state">FAILED</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="ja-card ja-card-pad" style="margin-top: 16px">
+              <div class="ja-card-head">
+                <div>
+                  <h2>End-to-end workflow</h2>
+                  <p>
+                    Architecture based on the current rebuild rather than the
+                    older Selenium-only prototype.
+                  </p>
+                </div>
+              </div>
+              <div class="ja-pipeline">
+                <div class="ja-step">
+                  <b>1</b><strong>Resume & profile</strong
+                  ><span
+                    >Upload/parse resume and persist user profile/session
+                    state.</span
+                  >
+                </div>
+                <div class="ja-step">
+                  <b>2</b><strong>Dice search</strong
+                  ><span
+                    >FastAPI calls DicePortal; Playwright extracts real job
+                    cards.</span
+                  >
+                </div>
+                <div class="ja-step">
+                  <b>3</b><strong>Match scoring</strong
+                  ><span
+                    >Quick skill scoring with matched and missing skills; NLP
+                    matching layer supports deeper fit analysis.</span
+                  >
+                </div>
+                <div class="ja-step">
+                  <b>4</b><strong>Prepare & review</strong
+                  ><span
+                    >Open the application flow, detect supported fields, then
+                    approve, skip or request review.</span
+                  >
+                </div>
+                <div class="ja-step">
+                  <b>5</b><strong>Submit & track</strong
+                  ><span
+                    >Track submitted, already-applied, review-required and
+                    failed automation states.</span
+                  >
+                </div>
+              </div>
+              <div class="ja-arch">
+                <span>React / Vite</span><b>→</b><span>FastAPI API</span><b>→</b
+                ><span>SQLite profile & session state</span><b>→</b
+                ><span>DicePortal</span><b>→</b><span>Playwright</span><b>→</b
+                ><span>Applications</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="ja-tab" data-ja-panel="search">
+            <div class="ja-page-head">
+              <div>
+                <h1>Search & Match</h1>
+                <p>
+                  Representation of the real Dice result model used during
+                  development.
+                </p>
+              </div>
+              <span class="ja-chip">POST /api/jobs/search</span>
+            </div>
+            <div class="ja-grid two">
+              <article class="ja-card ja-card-pad">
+                <div class="ja-card-head">
+                  <div>
+                    <h2>Selected job</h2>
+                    <p>Job details, quick score and skill comparison.</p>
+                  </div>
+                  <span class="ja-chip green">status: new</span>
+                </div>
+                <div class="ja-profile-grid">
+                  <div class="ja-profile-item">
+                    <span>Portal</span><strong>Dice</strong>
+                  </div>
+                  <div class="ja-profile-item">
+                    <span>Score status</span><strong>Quick</strong>
+                  </div>
+                  <div class="ja-profile-item">
+                    <span>Matched skills</span
+                    ><strong>Java · Spring Boot · React</strong>
+                  </div>
+                  <div class="ja-profile-item">
+                    <span>Missing skills</span
+                    ><strong>Shown separately when detected</strong>
+                  </div>
+                </div>
+                <p class="ja-note">
+                  The backend stores fields such as job ID, portal, title,
+                  company, location, job URL, Easy Apply flag, match score,
+                  status, matched skills and missing skills.
+                </p>
+              </article>
+              <article class="ja-card ja-card-pad">
+                <div class="ja-card-head">
+                  <div>
+                    <h2>Review actions</h2>
+                    <p>User-controlled steps before automation proceeds.</p>
+                  </div>
+                </div>
+                <div class="ja-status-list">
+                  <div class="ja-status-row prepared">
+                    <i class="ja-status-dot"></i>
+                    <div>
+                      <strong>Prepare Apply</strong
+                      ><small>Start a supported application flow</small>
+                    </div>
+                    <span class="state">ACTION</span>
+                  </div>
+                  <div class="ja-status-row review">
+                    <i class="ja-status-dot"></i>
+                    <div>
+                      <strong>Approve / Review</strong
+                      ><small>Confirm before continuing when required</small>
+                    </div>
+                    <span class="state">ACTION</span>
+                  </div>
+                  <div class="ja-status-row">
+                    <i class="ja-status-dot"></i>
+                    <div>
+                      <strong>Skip</strong
+                      ><small>Do not apply to this job</small>
+                    </div>
+                    <span class="state">ACTION</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="ja-tab" data-ja-panel="applications">
+            <div class="ja-page-head">
+              <div>
+                <h1>Applications</h1>
+                <p>
+                  Status-first tracking for prepared, review-required, submitted
+                  and failed application attempts.
+                </p>
+              </div>
+              <span class="ja-chip">Application store</span>
+            </div>
+            <article class="ja-card">
+              <div class="ja-table-wrap">
+                <table class="ja-application-table">
+                  <thead>
+                    <tr>
+                      <th>Job</th>
+                      <th>Portal</th>
+                      <th>Status</th>
+                      <th>Auto Apply</th>
+                      <th>Next UI action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>Java Full Stack Developer</strong><br /><span
+                          class="ja-muted"
+                          >Example discovered job</span
+                        >
+                      </td>
+                      <td>Dice</td>
+                      <td class="ja-warn">Required review</td>
+                      <td>Enabled</td>
+                      <td>Review</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Senior Java Developer</strong><br /><span
+                          class="ja-muted"
+                          >Previously completed application</span
+                        >
+                      </td>
+                      <td>Dice</td>
+                      <td class="ja-good">Applied</td>
+                      <td>Enabled</td>
+                      <td>View status</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Java Full Stack Developer</strong><br /><span
+                          class="ja-muted"
+                          >Application automation attempt</span
+                        >
+                      </td>
+                      <td>Dice</td>
+                      <td class="ja-bad">Auto submit failed</td>
+                      <td>Enabled</td>
+                      <td>Review failure</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="ja-card-pad">
+                <p class="ja-note" style="margin: 0">
+                  Important current behavior: jobs already marked applied remain
+                  applied, so old job cards do not incorrectly return to a
+                  Prepare Apply / Required Review state.
+                </p>
+              </div>
+            </article>
+          </section>
+
+          <section class="ja-tab" data-ja-panel="profile">
+            <div class="ja-page-head">
+              <div>
+                <h1>Profile & API</h1>
+                <p>
+                  Candidate data and backend routes supporting the frontend
+                  workflow.
+                </p>
+              </div>
+              <span class="ja-chip">FastAPI</span>
+            </div>
+            <div class="ja-grid two">
+              <article class="ja-card ja-card-pad">
+                <div class="ja-card-head">
+                  <div>
+                    <h2>Candidate profile</h2>
+                    <p>
+                      Resume and session state persisted for searches and
+                      applications.
+                    </p>
+                  </div>
+                  <span class="ja-chip green">SQLite state</span>
+                </div>
+                <div class="ja-profile-grid">
+                  <div class="ja-profile-item">
+                    <span>Resume</span><strong>Upload + parsing</strong>
+                  </div>
+                  <div class="ja-profile-item">
+                    <span>Preferences</span
+                    ><strong>Search role / location / filters</strong>
+                  </div>
+                  <div class="ja-profile-item">
+                    <span>Portal session</span
+                    ><strong>Dice browser session</strong>
+                  </div>
+                  <div class="ja-profile-item">
+                    <span>Application state</span
+                    ><strong>Stored and reused by UI</strong>
+                  </div>
+                </div>
+              </article>
+              <article class="ja-card ja-card-pad">
+                <div class="ja-card-head">
+                  <div>
+                    <h2>Representative API surface</h2>
+                    <p>Routes reflected in the project workflow.</p>
+                  </div>
+                </div>
+                <div class="ja-api-list">
+                  <div class="ja-api">
+                    <span class="ja-method">POST</span>
+                    <div>
+                      <code>/api/jobs/search</code
+                      ><small
+                        >Search portal jobs using the current filters.</small
+                      >
+                    </div>
+                  </div>
+                  <div class="ja-api">
+                    <span class="ja-method">GET</span>
+                    <div>
+                      <code>/api/jobs/{job_id}</code
+                      ><small
+                        >Read a specific job and its match/application
+                        context.</small
+                      >
+                    </div>
+                  </div>
+                  <div class="ja-api">
+                    <span class="ja-method">POST</span>
+                    <div>
+                      <code>prepare-apply</code
+                      ><small>Prepare a supported application flow.</small>
+                    </div>
+                  </div>
+                  <div class="ja-api">
+                    <span class="ja-method">POST</span>
+                    <div>
+                      <code>approve / skip</code
+                      ><small
+                        >Candidate-controlled application review actions.</small
+                      >
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <script>
+      const menuButton = document.getElementById("menuButton");
+      const siteNav = document.getElementById("siteNav");
+      const navLinks = Array.from(
+        document.querySelectorAll('#siteNav a[href^="#"]'),
+      );
+
+      menuButton?.addEventListener("click", () => {
+        const open = siteNav.classList.toggle("open");
+        menuButton.setAttribute("aria-expanded", String(open));
+      });
+      navLinks.forEach((link) =>
+        link.addEventListener("click", () => {
+          siteNav.classList.remove("open");
+          menuButton?.setAttribute("aria-expanded", "false");
+        }),
+      );
+
+      const sections = Array.from(document.querySelectorAll("section[id]"));
+      const updateNav = () => {
+        const y = window.scrollY + 130;
+        let current = "";
+        sections.forEach((section) => {
+          if (section.offsetTop <= y) current = section.id;
+        });
+        navLinks.forEach((link) =>
+          link.classList.toggle(
+            "active",
+            link.getAttribute("href") === "#" + current,
+          ),
+        );
+      };
+      window.addEventListener("scroll", updateNav, { passive: true });
+      window.addEventListener("load", updateNav);
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08 },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      // AI Job Apply lives in this same HTML file but behaves as a separate page view.
+      const portfolioView = document.getElementById("portfolioView");
+      const jobappDemoView = document.getElementById("jobappDemoView");
+
+      const setJobAppView = () => {
+        const demoOpen = window.location.hash === "#ai-job-demo";
+        document.body.classList.toggle("jobapp-open", demoOpen);
+        jobappDemoView?.setAttribute("aria-hidden", String(!demoOpen));
+        if (demoOpen) {
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        }
+      };
+      window.addEventListener("hashchange", setJobAppView);
+      window.addEventListener("load", setJobAppView);
+
+      const jaButtons = Array.from(document.querySelectorAll("[data-ja-tab]"));
+      const jaPanels = Array.from(document.querySelectorAll("[data-ja-panel]"));
+      const activateJaTab = (name) => {
+        jaButtons.forEach((button) =>
+          button.classList.toggle("active", button.dataset.jaTab === name),
+        );
+        jaPanels.forEach((panel) =>
+          panel.classList.toggle("active", panel.dataset.jaPanel === name),
+        );
+        document
+          .querySelector(".ja-main")
+          ?.scrollTo?.({ top: 0, behavior: "smooth" });
+      };
+      jaButtons.forEach((button) =>
+        button.addEventListener("click", () =>
+          activateJaTab(button.dataset.jaTab),
+        ),
+      );
+      document
+        .querySelectorAll("[data-ja-goto]")
+        .forEach((button) =>
+          button.addEventListener("click", () =>
+            activateJaTab(button.dataset.jaGoto),
+          ),
+        );
+    </script>
+  </body>
+</html>
